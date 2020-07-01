@@ -54,6 +54,7 @@ class NoticiaController extends Controller
         } else {
             return $noticias;
         }
+
     }
 
     public function DeletarNoticia(Request $request)

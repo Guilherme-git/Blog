@@ -8,7 +8,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
-    <link href="/static/css/main.8779d6d9.chunk.css" rel="stylesheet">
+    <link href="/static/css/main.00282ead.chunk.css" rel="stylesheet">
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -71,7 +71,7 @@
         var c = f;
         t()
     }([])</script>
-<script src="/static/js/2.9accb4df.chunk.js"></script>
-<script src="/static/js/main.1bc0ec1f.chunk.js"></script>
+<script src="/static/js/2.6b79a993.chunk.js"></script>
+<script src="/static/js/main.b442354a.chunk.js"></script>
 </body>
 </html>
