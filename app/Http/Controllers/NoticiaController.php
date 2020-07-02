@@ -131,7 +131,15 @@ class NoticiaController extends Controller
             }
 
         }
+    }
 
+    public function buscarNoticia(Request $request){
+        $noticia = DB::select("select * from noticia where titulo_noticia like '%".$request->nome."%'");
 
+        if(empty($noticia)){
+            return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);
+        }else {
+            return $noticia;
+        }
     }
 }

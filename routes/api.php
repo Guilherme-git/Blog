@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 
 
 
-    //Login
+//Login
     Route::post('login','LoginController@FazerLogin');
 
 //Noticia
@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
     Route::get('listar-noticias','NoticiaController@ListarNoticias');
     Route::delete('delete-noticia/{id}', 'NoticiaController@DeletarNoticia');
     Route::post('editar-noticia','NoticiaController@EditarNoticia');
+    Route::get('buscar-noticia/{nome}','NoticiaController@buscarNoticia');
 
 //Blog
     Route::post('editar-blog','BlogController@EditarBlog');

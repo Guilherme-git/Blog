@@ -12,12 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 Route::get('/login', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/painel-controle', function () {
-    return view('welcome');
+    return view('index');
 });
