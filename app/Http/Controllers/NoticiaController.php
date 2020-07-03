@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Noticia;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -45,16 +46,30 @@ class NoticiaController extends Controller
 
     }
 
-    public function ListarNoticias()
+    public function ListarNoticiasPrincipal()
     {
-        $noticias = Noticia::all();
+        $noticias = DB::select('select * from noticia where prioridade_noticia=? order by id_noticia desc',[
+            '1'
+        ]);
 
-        if (count($noticias) == 0) {
+        if (empty($noticias)) {
             return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);
         } else {
             return $noticias;
         }
+    }
 
+    public function ListarNoticiasSegundaria()
+    {
+        $noticias = DB::select('select * from noticia where prioridade_noticia=? order by id_noticia desc',[
+            '0'
+        ]);
+
+        if (empty($noticias)) {
+            return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);
+        } else {
+            return $noticias;
+        }
     }
 
     public function DeletarNoticia(Request $request)
@@ -135,6 +150,16 @@ class NoticiaController extends Controller
 
     public function buscarNoticia(Request $request){
         $noticia = DB::select("select * from noticia where titulo_noticia like '%".$request->nome."%'");
+
+        if(empty($noticia)){
+            return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);
+        }else {
+            return $noticia;
+        }
+    }
+
+    public function buscarNoticiaID(Request $request){
+        $noticia = DB::select("select * from noticia where id_noticia=?",[$request->id]);
 
         if(empty($noticia)){
             return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);

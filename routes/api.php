@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 
 //Noticia
     Route::post('cadastrar-noticia','NoticiaController@Cadastrar');
-    Route::get('listar-noticias','NoticiaController@ListarNoticias');
+    Route::get('listar-noticias','NoticiaController@ListarNoticiasPrincipal');
+    Route::get('listar-noticias-secundarias','NoticiaController@ListarNoticiasSegundaria');
     Route::delete('delete-noticia/{id}', 'NoticiaController@DeletarNoticia');
     Route::post('editar-noticia','NoticiaController@EditarNoticia');
     Route::get('buscar-noticia/{nome}','NoticiaController@buscarNoticia');
+    Route::get('buscar-noticia-id/{id}','NoticiaController@buscarNoticiaID');
 
 //Blog
     Route::post('editar-blog','BlogController@EditarBlog');
