@@ -17,7 +17,7 @@ class CreateTableNoticia extends Migration
             $table->bigIncrements('id_notifica');
             $table->string("titulo_noticia");
             $table->string("descricao_noticia");
-            $table->dateTime("data_noticia");
+            $table->string("data_noticia");
             $table->enum("prioridade_noticia");
             $table->string("imagem_noticia");
             $table->string('legenda_imagem');
