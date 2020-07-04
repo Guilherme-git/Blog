@@ -29,7 +29,7 @@ class NoticiaController extends Controller
             } else {
                 return json_encode(["resposta" => "Ocorreu um problema, tente novamente"]);
             }
-        }else {
+        } else {
             $noticia->titulo_noticia = $request->titulo_noticia;
             $noticia->descricao_noticia = $request->descricao_noticia;
             $noticia->data_noticia = $request->data_noticia;
@@ -48,7 +48,7 @@ class NoticiaController extends Controller
 
     public function ListarNoticiasPrincipal()
     {
-        $noticias = DB::select('select * from noticia where prioridade_noticia=? order by id_noticia desc',[
+        $noticias = DB::select('select * from noticia where prioridade_noticia=? order by id_noticia desc', [
             '1'
         ]);
 
@@ -59,9 +59,20 @@ class NoticiaController extends Controller
         }
     }
 
+    public function ListarNoticiasAdmin()
+    {
+        $noticias = DB::select('select * from noticia order by id_noticia desc');
+
+        if (empty($noticias)) {
+            return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);
+        } else {
+            return $noticias;
+        }
+    }
+
     public function ListarNoticiasSegundaria()
     {
-        $noticias = DB::select('select * from noticia where prioridade_noticia=? order by id_noticia desc',[
+        $noticias = DB::select('select * from noticia where prioridade_noticia=? order by id_noticia desc', [
             '0'
         ]);
 
@@ -74,10 +85,11 @@ class NoticiaController extends Controller
 
     public function DeletarNoticia(Request $request)
     {
-        $noticia = DB::select('select url_imagem from noticia where id_noticia=?', [$request->id]);
+        $noticia = DB::select('select * from noticia where id_noticia=?', [$request->id]);
         if (empty($noticia)) {
             return json_encode(["resposta" => "Essa notícia não existe"]);
-        } else {
+        }
+        else {
             foreach ($noticia as $not) {
                 $url = $not->url_imagem;
             }
@@ -92,7 +104,16 @@ class NoticiaController extends Controller
                 } else {
                     return json_encode(["resposta" => "Ocorreu um problema, tente novamente"]);
                 }
+            } else {
+                $noticia = DB::delete('delete from noticia where id_noticia=?', [$request->id]);
+
+                if ($noticia == true) {
+                    return json_encode(["resposta" => "Notícia excluida com sucesso"]);
+                } else {
+                    return json_encode(["resposta" => "Ocorreu um problema, tente novamente"]);
+                }
             }
+
         }
     }
 
@@ -148,22 +169,24 @@ class NoticiaController extends Controller
         }
     }
 
-    public function buscarNoticia(Request $request){
-        $noticia = DB::select("select * from noticia where titulo_noticia like '%".$request->nome."%'");
+    public function buscarNoticia(Request $request)
+    {
+        $noticia = DB::select("select * from noticia where titulo_noticia like '%" . $request->nome . "%'");
 
-        if(empty($noticia)){
+        if (empty($noticia)) {
             return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);
-        }else {
+        } else {
             return $noticia;
         }
     }
 
-    public function buscarNoticiaID(Request $request){
-        $noticia = DB::select("select * from noticia where id_noticia=?",[$request->id]);
+    public function buscarNoticiaID(Request $request)
+    {
+        $noticia = DB::select("select * from noticia where id_noticia=?", [$request->id]);
 
-        if(empty($noticia)){
+        if (empty($noticia)) {
             return json_encode(["resposta" => "Nenhuma notícia cadastrada"]);
-        }else {
+        } else {
             return $noticia;
         }
     }
