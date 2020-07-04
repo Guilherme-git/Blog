@@ -18,7 +18,7 @@ class CreateTableNoticia extends Migration
             $table->string("titulo_noticia");
             $table->string("descricao_noticia");
             $table->string("data_noticia");
-            $table->enum("prioridade_noticia");
+            $table->enum("prioridade_noticia",['0', '1']);
             $table->string("imagem_noticia");
             $table->string('legenda_imagem');
         });
